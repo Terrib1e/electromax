@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://play.hbomax.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline';">
+  <title>ElectroMAX - HBO Max Desktop App</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    #loading {
+      text-align: center;
+      padding: 2rem;
+    }
+    #loading img {
+      width: 200px;
+      margin-bottom: 1.5rem;
+      animation: fadeIn 1s ease-in;
+    }
+    .loading-text {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin: 0;
+    }
+    .loading-dots {
+      display: inline-block;
+      animation: dots 1.5s infinite;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes dots {
+      0%, 20% { content: '.'; }
+      40% { content: '..'; }
+      60%, 100% { content: '...'; }
+    }
+  </style>
+</head>
+<body>
+  <div id="loading">
+    <img src="hbomax-logo.png" alt="HBO Max Logo" />
+    <p class="loading-text">Loading HBO Max<span class="loading-dots">...</span></p>
+  </div>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      // Check if we're in Electron environment
+      const isElectron = window.navigator.userAgent.toLowerCase().indexOf('electron/') > -1;
+
+      if (isElectron) {
+        // Try to access Electron's process object
+        if (window.process && window.process.versions && window.process.versions.electron) {
+          // We're definitely in Electron
+          console.log('Running in Electron environment');
+
+          // Redirect immediately since we're in Electron
+          window.location.href = 'https://play.hbomax.com/';
+        } else {
+          // Fallback if process object isn't available
+          console.log('Electron process object not found, using timeout fallback');
+          setTimeout(() => {
+            window.location.href = 'https://play.hbomax.com/';
+          }, 2000);
+        }
+      } else {
+        // Not in Electron, use timeout for development
+        console.log('Not in Electron environment, using timeout fallback');
+        setTimeout(() => {
+          window.location.href = 'https://play.hbomax.com/';
+        }, 2000);
+      }
+    });
+  </script>
+</body>
+</html>

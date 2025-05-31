@@ -5,15 +5,52 @@
   },
   "name": "electromax",
   "version": "1.0.0",
-  "main": "main.js",
+  "description": "A standalone desktop wrapper for HBO Max's web player with enhanced features and native desktop experience",
+  "main": "src/main/main.js",
+  "author": {
+    "name": "ElectroMAX Team",
+    "email": "contact@electromax.app",
+    "url": "https://electromax.app"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/electromax.git"
+  },
+  "keywords": [
+    "electron",
+    "hbo-max",
+    "streaming",
+    "desktop-app",
+    "cross-platform"
+  ],
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --debug",
+    "build": "electron-builder",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "test": "jest"
+  },
   "build": {
-    "appId": "com.example.app",
+    "appId": "com.electromax",
     "productName": "ElectroMax",
     "target": "nsis",
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+
+    },
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true
-    }
+    },
+    "icon": "app-icon.png"
   },
   "dependencies": {
     "boolean": "^3.2.0",
@@ -74,14 +111,5 @@
     "universalify": "^0.1.2",
     "wrappy": "^1.0.2",
     "yauzl": "^2.10.0"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron .",
-    "build": "electron-builder"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  }
 }

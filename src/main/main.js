@@ -25,7 +25,7 @@ function createWindow() {
 
   // Load HBO Max website
 // mainWindow.loadURL('https://play.hbomax.com/');
-  mainWindow.loadFile(path.join(__dirname, 'index.html'));
+  mainWindow.loadFile(path.join(__dirname, '../renderer/index.html'));
 
   // Open DevTools for debugging (comment out in production)
   // mainWindow.webContents.openDevTools();
